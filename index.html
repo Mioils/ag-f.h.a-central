@@ -1,0 +1,1459 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Assemblies Of God Church F.H.A. Central</title>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      :root {
+        --primary: #c59b2e;
+        --secondary: #8f141b;
+        --accent: #1a4e8e;
+        --light: #d4cccc;
+        --dark: #333;
+        --font-heading: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        --font-body: "Helvetica Neue", Arial, sans-serif;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: var(--font-body);
+        line-height: 1.6;
+        color: var(--dark);
+        background-color: var(--light);
+      }
+
+      /* Header Styles */
+      header {
+        background-color: var(--primary);
+        color: white;
+        padding: 1rem;
+        position: fixed;
+        width: 100%;
+        top: 0;
+        z-index: 1000;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+      }
+
+      .header-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .logo {
+        display: flex;
+        align-items: center;
+      }
+
+      .logo img {
+        height: 50px;
+        margin-right: 10px;
+        border-radius: 50%;
+      }
+
+      .logo h1 {
+        font-size: 1.5rem;
+        font-family: var(--font-heading);
+      }
+
+      nav ul {
+        display: flex;
+        list-style: none;
+      }
+
+      nav ul li {
+        margin-left: 1.5rem;
+      }
+
+      nav ul li a {
+        color: white;
+        text-decoration: none;
+        font-weight: 500;
+        transition: color 0.3s;
+      }
+
+      nav ul li a:hover {
+        color: var(--secondary);
+      }
+
+      /* Hero Slider */
+      .hero-slider {
+        height: 100vh;
+        position: relative;
+        overflow: hidden;
+        margin-top: 72px;
+      }
+
+      .slide {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        transition: opacity 1s ease;
+        background-size: cover;
+        background-position: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .slide.active {
+        opacity: 1;
+        z-index: 1;
+      }
+
+      .slide::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.6);
+      }
+
+      .slide-content {
+        position: relative;
+        z-index: 1;
+        text-align: center;
+        color: white;
+        max-width: 800px;
+        padding: 0 2rem;
+      }
+
+      .slide-content h2 {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+        font-family: var(--font-heading);
+      }
+
+      .slide-content p {
+        font-size: 1.2rem;
+        margin-bottom: 2rem;
+        line-height: 1.8;
+      }
+
+      .btn {
+        display: inline-block;
+        background-color: var(--secondary);
+        color: white;
+        padding: 0.8rem 1.5rem;
+        border-radius: 5px;
+        text-decoration: none;
+        font-weight: 600;
+        transition: all 0.3s;
+        border: none;
+        cursor: pointer;
+      }
+
+      .btn:hover {
+        background-color: #b3891a;
+        transform: translateY(-2px);
+      }
+
+      /* Section Styles */
+      section {
+        padding: 5rem 2rem;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .section-title {
+        text-align: center;
+        margin-bottom: 3rem;
+        color: var(--primary);
+        font-family: var(--font-heading);
+      }
+
+      .section-title h2 {
+        font-size: 2.5rem;
+        margin-bottom: 0.5rem;
+        position: relative;
+        display: inline-block;
+      }
+
+      .section-title h2::after {
+        content: "";
+        position: absolute;
+        bottom: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+        height: 4px;
+        width: 80px;
+        background-color: var(--secondary);
+      }
+
+      /* About Section */
+      .departments {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        margin-bottom: 4rem;
+      }
+
+      .department {
+        background-color: white;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s;
+      }
+
+      .department:hover {
+        transform: translateY(-5px);
+      }
+
+      .department img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+      }
+
+      .department-content {
+        padding: 1.5rem;
+      }
+
+      .department-content h3 {
+        color: var(--primary);
+        margin-bottom: 0.5rem;
+      }
+
+      /* Ministers */
+      .ministers {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+      }
+
+      .minister {
+        text-align: center;
+      }
+
+      .minister-img {
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin: 0 auto 1rem;
+        border: 5px solid var(--primary);
+      }
+
+      .minister h3 {
+        color: var(--primary);
+        margin-bottom: 0.5rem;
+      }
+
+      .minister p {
+        color: var(--accent);
+        font-weight: 500;
+      }
+
+      /* Contact Section */
+      .contact-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 3rem;
+      }
+
+      .contact-info {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        background: white;
+        padding: 2rem;
+        border-radius: 8px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      .contact-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 1rem;
+      }
+
+      .contact-item i {
+        font-size: 1.5rem;
+        color: var(--primary);
+        margin-top: 0.2rem;
+      }
+
+      .contact-form {
+        background-color: white;
+        padding: 2rem;
+        border-radius: 8px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      .form-group {
+        margin-bottom: 1.5rem;
+      }
+
+      .form-group label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: 500;
+        color: var(--dark);
+      }
+
+      .form-group input,
+      .form-group textarea,
+      .form-group select {
+        width: 100%;
+        padding: 0.8rem;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        font-family: inherit;
+        font-size: 1rem;
+        transition: border-color 0.3s;
+      }
+
+      .form-group input:focus,
+      .form-group textarea:focus,
+      .form-group select:focus {
+        border-color: var(--primary);
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(197, 155, 46, 0.2);
+      }
+
+      .form-group textarea {
+        min-height: 150px;
+        resize: vertical;
+      }
+
+      /* Membership Form */
+      .membership-form {
+        background-color: white;
+        padding: 2rem;
+        border-radius: 8px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      /* Gallery Section */
+      .gallery {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1rem;
+      }
+
+      .gallery-item {
+        height: 250px;
+        overflow: hidden;
+        border-radius: 8px;
+        position: relative;
+      }
+
+      .gallery-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s;
+      }
+
+      .gallery-item:hover img {
+        transform: scale(1.1);
+      }
+
+      /* Footer */
+      footer {
+        background-color: var(--primary);
+        color: white;
+        padding: 3rem 2rem;
+        text-align: center;
+      }
+
+      .footer-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+        text-align: left;
+      }
+
+      .footer-section h3 {
+        margin-bottom: 1rem;
+        font-size: 1.2rem;
+      }
+
+      .footer-section ul {
+        list-style: none;
+      }
+
+      .footer-section ul li {
+        margin-bottom: 0.5rem;
+      }
+
+      .footer-section ul li a {
+        color: #ddd;
+        text-decoration: none;
+        transition: color 0.3s;
+      }
+
+      .footer-section ul li a:hover {
+        color: var(--secondary);
+      }
+
+      .social-links {
+        display: flex;
+        gap: 1rem;
+        margin-top: 1rem;
+      }
+
+      .social-links a {
+        color: white;
+        font-size: 1.5rem;
+        transition: all 0.3s;
+      }
+
+      .social-links a:hover {
+        color: var(--secondary);
+        transform: translateY(-3px);
+      }
+
+      .copyright {
+        margin-top: 3rem;
+        padding-top: 1rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      /* Status Messages */
+      .status-message {
+        padding: 15px;
+        margin: 20px 0;
+        border-radius: 6px;
+        text-align: center;
+        display: none;
+      }
+
+      .success {
+        background-color: #d4edda;
+        color: #155724;
+        border: 1px solid #c3e6cb;
+      }
+
+      .error {
+        background-color: #f8d7da;
+        color: #721c24;
+        border: 1px solid #f5c6cb;
+      }
+
+      /* Responsive Design */
+      @media (max-width: 768px) {
+        .header-container {
+          flex-direction: column;
+        }
+
+        nav ul {
+          margin-top: 1rem;
+          flex-wrap: wrap;
+          justify-content: center;
+        }
+
+        nav ul li {
+          margin: 0.5rem;
+        }
+
+        .slide-content h2 {
+          font-size: 2rem;
+        }
+
+        .slide-content p {
+          font-size: 1rem;
+        }
+
+        .contact-container {
+          grid-template-columns: 1fr;
+        }
+
+        .btn {
+          padding: 0.7rem 1.2rem;
+          font-size: 0.9rem;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .logo h1 {
+          font-size: 1.2rem;
+        }
+
+        .section-title h2 {
+          font-size: 2rem;
+        }
+
+        .minister-img {
+          width: 150px;
+          height: 150px;
+        }
+
+        .footer-content {
+          grid-template-columns: 1fr;
+          text-align: center;
+        }
+
+        .social-links {
+          justify-content: center;
+        }
+      }
+      /* Add to your existing CSS */
+
+      /* Gallery Filter */
+      .gallery-filter {
+        margin-bottom: 2rem;
+      }
+
+      .filter-btn {
+        background-color: transparent;
+        border: 2px solid var(--primary);
+        color: var(--primary);
+        margin: 0 0.5rem;
+        padding: 0.5rem 1rem;
+      }
+
+      .filter-btn.active,
+      .filter-btn:hover {
+        background-color: var(--primary);
+        color: white;
+      }
+
+      /* Gallery Item Enhancements */
+      .gallery-item {
+        position: relative;
+        overflow: hidden;
+        border-radius: 8px;
+        height: 250px;
+        cursor: pointer;
+      }
+
+      .gallery-item video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s;
+      }
+
+      .gallery-item:hover video,
+      .gallery-item:hover img {
+        transform: scale(1.1);
+      }
+
+      .gallery-overlay {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
+        padding: 1rem;
+        color: white;
+        opacity: 0;
+        transition: opacity 0.3s;
+      }
+
+      .gallery-item:hover .gallery-overlay {
+        opacity: 1;
+      }
+
+      .gallery-caption {
+        font-weight: 500;
+      }
+
+      /* Lightbox Styles */
+      .lightbox {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.9);
+        z-index: 1000;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .lightbox-content {
+        max-width: 90%;
+        max-height: 90%;
+      }
+
+      .lightbox-close {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        color: white;
+        font-size: 2rem;
+        cursor: pointer;
+      }
+
+      .lightbox video,
+      .lightbox img {
+        max-width: 100%;
+        max-height: 90vh;
+        border-radius: 8px;
+      }
+      /* Dark Mode Toggle Styles */
+      .dark-toggle {
+        margin-left: 1.5rem;
+        background: transparent;
+        border: 2px solid var(--primary);
+        border-radius: 30px;
+        padding: 0.5rem;
+        width: 60px;
+        height: 30px;
+        cursor: pointer;
+        position: relative;
+        display: flex;
+        align-items: center;
+        transition: background 0.3s, border-color 0.3s;
+      }
+
+      .dark-toggle::before {
+        content: "🌙";
+        position: absolute;
+        left: 5px;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.9rem;
+      }
+
+      .dark-toggle::after {
+        content: "☀️";
+        position: absolute;
+        right: 5px;
+        opacity: 0;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.9rem;
+      }
+
+      .dark-toggle.active {
+        background-color: var(--primary);
+        border-color: var(--primary);
+      }
+
+      .dark-toggle.active::before {
+        transform: translateX(30px);
+        opacity: 0;
+      }
+
+      .dark-toggle.active::after {
+        transform: translateX(-30px);
+        opacity: 1;
+      }
+
+      /* Dark Mode Styles */
+      body.dark-mode {
+        background-color: #121212;
+        color: #f5f5f5;
+      }
+
+      body.dark-mode header {
+        background-color: #1f1f1f;
+        color: #f5f5f5;
+        border-bottom: 1px solid #333;
+      }
+
+      body.dark-mode section,
+      body.dark-mode .contact-form,
+      body.dark-mode .membership-form,
+      body.dark-mode .contact-info,
+      body.dark-mode .department {
+        background-color: #1e1e1e;
+        color: #f5f5f5;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.6);
+      }
+
+      body.dark-mode .btn {
+        background-color: var(--secondary);
+        color: #fff;
+      }
+
+      body.dark-mode footer {
+        background-color: #1f1f1f;
+        color: #ddd;
+        border-top: 1px solid #333;
+      }
+
+      body.dark-mode .form-group input,
+      body.dark-mode .form-group textarea,
+      body.dark-mode .form-group select {
+        background-color: #2a2a2a;
+        color: #f5f5f5;
+        border-color: #444;
+      }
+
+      body.dark-mode .form-group label {
+        color: #f5f5f5;
+      }
+
+      /* Header adjustments for toggle */
+      .header-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        max-width: 1200px;
+        margin: 0 auto;
+        position: relative;
+      }
+
+      /* Responsive adjustments */
+      @media (max-width: 768px) {
+        .dark-toggle {
+          position: absolute;
+          top: 1rem;
+          right: 1rem;
+          margin-left: 0;
+        }
+
+        .header-container {
+          padding-right: 70px; /* Space for the toggle */
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header -->
+    <header>
+      <div class="header-container">
+        <div class="logo">
+          <!-- Dark Mode Toggle Button -->
+          <button id="darkModeToggle" class="dark-toggle">🌙</button>
+          <img src="bg.png.jpg" alt="Assemblies Of God Logo" />
+          <h1>Assemblies Of God F.H.A Central</h1>
+        </div>
+        <nav>
+          <ul>
+            <li><a href="#index.html">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <li><a href="#membership">Membership</a></li>
+            <li><a href="#gallery">Gallery</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Hero Slider -->
+    <div class="hero-slider" id="home">
+      <div class="slide active" style="background-image: url('GGGG.jpg')">
+        <div class="slide-content">
+          <h2>Welcome to Assemblies Of God F.H.A. Central</h2>
+          <p>Where faith, hope, and love come together in fellowship</p>
+          <a href="#about" class="btn">Learn More</a>
+        </div>
+      </div>
+      <div class="slide" style="background-image: url('church.jpg')">
+        <div class="slide-content">
+          <h2>Growing Together in Christ</h2>
+          <p>Join us for worship and spiritual growth</p>
+          <a href="#membership" class="btn">Become a Member</a>
+        </div>
+      </div>
+      <div class="slide" style="background-image: url('HHH.jpg')">
+        <div class="slide-content">
+          <h2>Serving Our Community</h2>
+          <p>Making a difference through faith in action</p>
+          <a href="#contact" class="btn">Get Involved</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- About Section -->
+    <section id="about">
+      <div class="section-title">
+        <h2>About Our Church</h2>
+      </div>
+
+      <p style="text-align: center; max-width: 800px; margin: 0 auto 3rem">
+        The Assemblies Of God Church F.H.A. Central is a dynamic Pentecostal
+        fellowship committed to reaching Nigeria and the world with the message
+        of Jesus Christ through the power of the Holy Spirit. It was founded in
+        the year 2011 FHA Lugbe, Abuja.<br />Church Account Number: 1017765331
+        {UBA} Assemblies Of God FHA 2 Church<br />Building Project ACCT No:
+        0000524148 {AG Mortgage Bank} Assemblies Of God Church FHA Central.
+      </p>
+
+      <h3
+        style="text-align: center; color: var(--primary); margin-bottom: 2rem"
+      >
+        Church Departments
+      </h3>
+      <div class="departments">
+        <div class="department">
+          <img src="Men.jpg" alt="Men's Ministry" />
+          <div class="department-content">
+            <h3>Men's Ministry</h3>
+            <p>
+              Building men of integrity and faith through fellowship,
+              discipleship, and service.
+            </p>
+          </div>
+        </div>
+        <div class="department">
+          <img src="women Ministries.jpg" alt="Women's Ministry" />
+          <div class="department-content">
+            <h3>Women's Ministry</h3>
+            <p>
+              Empowering women to grow spiritually and physically, build
+              relationships, and serve the community.
+            </p>
+          </div>
+        </div>
+        <div class="department">
+          <img src="yy.jpg" alt="Youth Ministry" />
+          <div class="department-content">
+            <h3>Youth Ministry</h3>
+            <p>
+              Engaging and equipping the next generation to live out their faith
+              in Christ.
+            </p>
+          </div>
+        </div>
+      </div>
+      <h3
+        style="text-align: center; color: var(--primary); margin: 4rem 0 2rem"
+      >
+        Our Ministers
+      </h3>
+      <div class="ministers">
+        <div class="minister">
+          <img src="pe.jpg" alt="Rev.Charles Nkwume" class="minister-img" />
+          <h3>Rev. Charles Nkwume</h3>
+          <p>Senior Pastor</p>
+        </div>
+        <div class="minister">
+          <img src="mum.jpg" alt="Mrs.Amarachi Charles" class="minister-img" />
+          <h3>Mrs.Amarachi Charles</h3>
+          <p>Snr.Pastor's Wife</p>
+        </div>
+        <div class="minister">
+          <img src="gn.jpg" alt="Deacon Greenwill Kanu" class="minister-img" />
+          <h3>Barr. Greenwill Kanu</h3>
+          <p>Church Secretary</p>
+        </div>
+        <div class="minister">
+          <img
+            src="chijoke.png"
+            alt="Deacon Chijoke Azubike"
+            class="minister-img"
+          />
+          <h3>Deacon Chijoke Azubike</h3>
+          <p>Church Treasurer</p>
+        </div>
+        <div class="minister">
+          <img src="umoh.jpg" alt="Deacon Umohe" class="minister-img" />
+          <h3>Deacon Umoh Peter</h3>
+          <p>Board Member</p>
+        </div>
+        <div class="minister">
+          <img src="tt.jpg" alt="Deacon Tony Okolie" class="minister-img" />
+          <h3>Deacon Tony Okolie</h3>
+          <p>Board Member</p>
+        </div>
+        <div class="minister">
+          <img src="steve.jpg" alt="Deacon Awuru Steve" class="minister-img" />
+          <h3>Deacon Awuru Steve</h3>
+          <p>Church Board Member</p>
+        </div>
+        <div class="minister">
+          <img
+            src="IMG-20250913-WA0040.jpg"
+            alt="Bro Onyekah Oti"
+            class="minister-img"
+          />
+          <h3>Bro. Onyekah Oti</h3>
+          <p>Men Ministry's Leader</p>
+        </div>
+        <div class="minister">
+          <img
+            src="kanu.png"
+            alt="Deaconess Christiana Kanu"
+            class="minister-img"
+          />
+          <h3>Deaconess Christiana Kanu</h3>
+          <p>Women's Ministry Leader</p>
+        </div>
+        <div class="minister">
+          <img
+            src="presido.jpg"
+            alt="Bro. Ezizekial Eigbulesse"
+            class="minister-img"
+          />
+          <h3>Dr. Ezekiel Eigbiluese</h3>
+          <p>Youth President</p>
+        </div>
+        <div class="minister">
+          <img src="faith.jpg" alt="Miss. Faith Oyoh" class="minister-img" />
+          <h3>Miss Faith Oyo</h3>
+          <p>Young-Singles President</p>
+        </div>
+        <div class="minister">
+          <img
+            src="adeyemi2.jpg"
+            alt="Miss. Adeyemi Praise"
+            class="minister-img"
+          />
+          <h3>Miss. Adeyemi Praise</h3>
+          <p>Teenagers President</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Form -->
+    <section id="contact">
+      <div class="section-title">
+        <h2>Contact Us</h2>
+      </div>
+
+      <div class="contact-container">
+        <div class="contact-form">
+          <h3
+            style="
+              color: var(--primary);
+              margin-bottom: 1.5rem;
+              text-align: center;
+            "
+          >
+            Send Us a Message
+          </h3>
+
+          <div id="contactStatusMessage" class="status-message"></div>
+
+          <form id="contactForm">
+            <div class="form-group">
+              <label for="name">Your Name</label>
+              <input type="text" id="name" name="name" required />
+            </div>
+
+            <div class="form-group">
+              <label for="email">Your Email</label>
+              <input type="email" id="email" name="email" required />
+            </div>
+
+            <div class="form-group">
+              <label for="subject">Subject</label>
+              <input type="text" id="subject" name="subject" required />
+            </div>
+
+            <div class="form-group">
+              <label for="message">Your Message</label>
+              <textarea id="message" name="message" required></textarea>
+            </div>
+
+            <button type="submit" class="btn">Send Message</button>
+          </form>
+        </div>
+
+        <div class="contact-info">
+          <h3 style="color: var(--primary); margin-bottom: 1.5rem">
+            Contact Information
+          </h3>
+
+          <div class="contact-item">
+            <i class="fas fa-map-marker-alt"></i>
+            <p>
+              Plot 1, Phase 2, Back of Abuja Unity Hospital Lugbe, Abuja
+              Nigeria.
+            </p>
+          </div>
+
+          <div class="contact-item">
+            <i class="fas fa-phone"></i>
+            <p>+234 803 589 2943</p>
+          </div>
+
+          <div class="contact-item">
+            <i class="fas fa-envelope"></i>
+            <p>agfhacentral@gmail.com</p>
+          </div>
+
+          <div class="contact-item">
+            <i class="fas fa-clock"></i>
+            <p>Sunday Worship: 8:00 AM - 12:00 PM</p>
+          </div>
+
+          <div class="contact-item">
+            <i class="fas fa-clock"></i>
+            <p>Tuesday Bible Study: 6:00 PM - 7:00 PM</p>
+          </div>
+
+          <div class="contact-item">
+            <i class="fas fa-clock"></i>
+            <p>Friday Preparatory: 6:00 PM - 6:50 PM</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Membership Form Section -->
+    <section id="membership">
+      <div class="section-title">
+        <h2>Membership Form</h2>
+      </div>
+      <div class="membership-form">
+        <div id="membershipStatusMessage" class="status-message"></div>
+
+        <form id="membershipForm">
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem">
+            <div class="form-group">
+              <label for="firstName">First Name</label>
+              <input type="text" id="firstName" name="firstName" required />
+            </div>
+            <div class="form-group">
+              <label for="lastName">Last Name</label>
+              <input type="text" id="lastName" name="lastName" required />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="emailMember">Email Address</label>
+            <input type="email" id="emailMember" name="email" required />
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem">
+            <div class="form-group">
+              <label for="phone">Phone Number</label>
+              <input type="tel" id="phone" name="phone" required />
+            </div>
+            <div class="form-group">
+              <label for="dob">Date of Birth</label>
+              <input type="date" id="dob" name="dob" required />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="address">Address</label>
+            <textarea id="address" name="address" required></textarea>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem">
+            <div class="form-group">
+              <label for="occupation">Occupation</label>
+              <input type="text" id="occupation" name="occupation" required />
+            </div>
+            <div class="form-group">
+              <label for="maritalStatus">Marital Status</label>
+              <select id="maritalStatus" name="maritalStatus" required>
+                <option value="">Select</option>
+                <option value="single">Single</option>
+                <option value="married">Married</option>
+                <option value="divorced">Divorced</option>
+                <option value="widowed">Widowed</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="baptismStatus">Baptism</label>
+            <select id="baptismStatus" name="baptismStatus" required>
+              <option value="">Select</option>
+              <option value="Un-Baptised">Un-Baptised</option>
+              <option value="Baptised">Baptised</option>
+              <option value="Baptised but have sinned">
+                Baptised but have sinned
+              </option>
+              <option value="Baptised I need Holyghost Baptism">
+                Baptised I need Holyghost Baptism
+              </option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="reason">Why do you want to become a member?</label>
+            <textarea id="reason" name="reason" required></textarea>
+          </div>
+
+          <button type="submit" class="btn">Submit Application</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" style="background-color: #f9f9f9">
+      <div class="section-title">
+        <h2>Church Gallery</h2>
+        <p>Photos and videos from our services and events</p>
+      </div>
+
+      <!-- Gallery Filter -->
+      <div
+        class="gallery-filter"
+        style="text-align: center; margin-bottom: 2rem"
+      >
+        <button class="btn filter-btn active" data-filter="all">All</button>
+        <button class="btn filter-btn" data-filter="image">Photos</button>
+        <button class="btn filter-btn" data-filter="video">Videos</button>
+      </div>
+
+      <div class="gallery">
+        <!-- Images -->
+        <div class="gallery-item image">
+          <img src="bg.png.jpg" alt="Church Logo" />
+          <div class="gallery-overlay">
+            <div class="gallery-caption">Church Logo</div>
+          </div>
+        </div>
+        <div class="gallery-item image">
+          <img src="worship with.jpg" alt="Worship Service" />
+          <div class="gallery-overlay">
+            <div class="gallery-caption">Worship Service</div>
+          </div>
+        </div>
+        <div class="gallery-item image">
+          <img src="DD.jpg" alt="Church Activity" />
+          <div class="gallery-overlay">
+            <div class="gallery-caption">Church Activity</div>
+          </div>
+        </div>
+        <div class="gallery-item image">
+          <img src="KK.jpg" alt="Community Service" />
+          <div class="gallery-overlay">
+            <div class="gallery-caption">Community Service</div>
+          </div>
+        </div>
+
+        <!-- Videos -->
+        <div class="gallery-item video">
+          <video controls poster="video-thumbnail1.jpg">
+            <source src="church-service.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+          <div class="gallery-overlay">
+            <div class="gallery-caption">Sunday Service</div>
+          </div>
+        </div>
+        <div class="gallery-item video">
+          <video controls poster="video-thumbnail2.jpg">
+            <source src="baptism-ceremony.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+          <div class="gallery-overlay">
+            <div class="gallery-caption">Baptism Ceremony</div>
+          </div>
+        </div>
+        <div class="gallery-item video">
+          <video controls poster="video-thumbnail3.jpg">
+            <source src="ressurection.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+          <div class="gallery-overlay">
+            <div class="gallery-caption">Motivational</div>
+          </div>
+        </div>
+        <div class="gallery-item video">
+          <video controls poster="video-thumbnail4.jpg">
+            <source src="men.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+          <div class="gallery-overlay">
+            <div class="gallery-caption">Men Performance</div>
+          </div>
+        </div>
+        <div class="gallery-item video">
+          <video controls poster="men.mp4">
+            <source src="men.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+          <div class="gallery-overlay">
+            <div class="gallery-caption">Men's day</div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Footer -->
+    <footer>
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>Assemblies Of God F.H.A. Central</h3>
+          <p>
+            Preaching the Gospel, Making Disciples, and Serving Communities
+            since 1934. Do well to follow us on our social media handle by just
+            clicking them below and take you directly to our page then press
+            either follow or join.
+          </p>
+
+          <div class="social-links">
+            <a href="https://www.facebook.com/share/1BCjmLfjkH/"
+              ><i class="fab fa-facebook"></i
+            ></a>
+            <a href="https://youtube.com/@agfhacentral?feature=shared"
+              ><i class="fab fa-youtube"></i
+            ></a>
+            <a href="#"><i class="fab fa-tiktok"></i></a>
+          </div>
+        </div>
+
+        <div class="footer-section">
+          <h3>Quick Links</h3>
+          <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About Us</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <li><a href="#membership">Membership</a></li>
+            <li><a href="#gallery">Gallery</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-section">
+          <h3>Service Times</h3>
+          <p>Sunday Worship: 8:00 AM - 12:00 PM</p>
+          <p>Tuesday Bible Study: 6:00 PM - 7:00 PM</p>
+          <p>Friday Preparatory: 6:00 PM - 6:50 PM</p>
+        </div>
+
+        <div class="footer-section">
+          <h3>Contact Information</h3>
+          <p>
+            <i class="fas fa-map-marker-alt"></i> Plot 1, Phase 2, Back of Abuja
+            Unity Hospital Lugbe,Abuja Nigeria.
+          </p>
+          <p><i class="fas fa-phone"></i> +234 803 589 2943</p>
+          <p><i class="fas fa-envelope"></i> agfhacentral@gmail.com</p>
+        </div>
+      </div>
+
+      <div class="copyright">
+        <p>
+          &copy; 2025 Assemblies Of God F.H.A. Central. All Rights Reserved.
+        </p>
+      </div>
+    </footer>
+
+    <script>
+      // Initialize EmailJS with your credentials
+      (function () {
+        emailjs.init("Y3hPp2XPYM6i8KVMU"); // Your public key
+      })();
+
+      // Image Slider Functionality
+      document.addEventListener("DOMContentLoaded", function () {
+        const slides = document.querySelectorAll(".slide");
+        let currentSlide = 0;
+
+        function showSlide(n) {
+          slides.forEach((slide) => slide.classList.remove("active"));
+          currentSlide = (n + slides.length) % slides.length;
+          slides[currentSlide].classList.add("active");
+        }
+
+        function nextSlide() {
+          showSlide(currentSlide + 1);
+        }
+
+        // Change slide every 5 seconds
+        setInterval(nextSlide, 5000);
+
+        // Contact Form Submission
+        const contactForm = document.getElementById("contactForm");
+        if (contactForm) {
+          contactForm.addEventListener("submit", function (e) {
+            e.preventDefault();
+
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const statusMessage = document.getElementById(
+              "contactStatusMessage"
+            );
+
+            // Show loading state
+            submitBtn.disabled = true;
+            submitBtn.textContent = "Sending...";
+            statusMessage.style.display = "none";
+
+            // Send email using EmailJS
+            emailjs.sendForm("service_vxwp5a9", "template_rxsc48s", this).then(
+              function () {
+                // Redirect to thank you page
+                window.location.href = "thankyou.html";
+              },
+              function (error) {
+                // Show error message
+                statusMessage.textContent =
+                  "Sorry, there was an error sending your message. Please try again later. Error: " +
+                  error.text;
+                statusMessage.className = "status-message error";
+                statusMessage.style.display = "block";
+
+                // Reset button
+                submitBtn.disabled = false;
+                submitBtn.textContent = "Send Message";
+
+                console.error("EmailJS Error:", error);
+              }
+            );
+          });
+        }
+
+        // Membership Form Submission - FIXED TEMPLATE ID
+        const membershipForm = document.getElementById("membershipForm");
+        if (membershipForm) {
+          membershipForm.addEventListener("submit", function (e) {
+            e.preventDefault();
+
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const statusMessage = document.getElementById(
+              "membershipStatusMessage"
+            );
+
+            // Show loading state
+            submitBtn.disabled = true;
+            submitBtn.textContent = "Submitting...";
+            statusMessage.style.display = "none";
+
+            // Send email using EmailJS - CORRECTED TEMPLATE ID
+            emailjs.sendForm("service_vxwp5a9", "template_tgogyfi", this).then(
+              function () {
+                // Redirect to thank you page
+                window.location.href = "thankyou.html";
+              },
+              function (error) {
+                // Show error message
+                statusMessage.textContent =
+                  "Sorry, there was an error submitting your application. Please try again later. Error: " +
+                  error.text;
+                statusMessage.className = "status-message error";
+                statusMessage.style.display = "block";
+
+                // Reset button
+                submitBtn.disabled = false;
+                submitBtn.textContent = "Submit Application";
+
+                console.error("EmailJS Error:", error);
+              }
+            );
+          });
+        }
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll("nav a").forEach((anchor) => {
+          anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            const targetId = this.getAttribute("href");
+            const targetElement = document.querySelector(targetId);
+
+            window.scrollTo({
+              top: targetElement.offsetTop - 80,
+              behavior: "smooth",
+            });
+          });
+        });
+      });
+      // Add this to your existing JavaScript
+
+      // Gallery Filtering
+      document.addEventListener("DOMContentLoaded", function () {
+        const filterButtons = document.querySelectorAll(".filter-btn");
+        const galleryItems = document.querySelectorAll(".gallery-item");
+
+        filterButtons.forEach((button) => {
+          button.addEventListener("click", function () {
+            // Remove active class from all buttons
+            filterButtons.forEach((btn) => btn.classList.remove("active"));
+
+            // Add active class to clicked button
+            this.classList.add("active");
+
+            const filterValue = this.getAttribute("data-filter");
+
+            galleryItems.forEach((item) => {
+              if (filterValue === "all") {
+                item.style.display = "block";
+              } else {
+                if (item.classList.contains(filterValue)) {
+                  item.style.display = "block";
+                } else {
+                  item.style.display = "none";
+                }
+              }
+            });
+          });
+        });
+
+        // Lightbox functionality
+        const lightbox = document.createElement("div");
+        lightbox.className = "lightbox";
+        lightbox.innerHTML = `
+    <span class="lightbox-close">&times;</span>
+    <div class="lightbox-content"></div>
+  `;
+        document.body.appendChild(lightbox);
+
+        const lightboxContent = lightbox.querySelector(".lightbox-content");
+        const lightboxClose = lightbox.querySelector(".lightbox-close");
+
+        // Open lightbox when gallery item is clicked
+        galleryItems.forEach((item) => {
+          item.addEventListener("click", function () {
+            if (this.querySelector("video")) {
+              const video = this.querySelector("video").cloneNode(true);
+              lightboxContent.innerHTML = "";
+              lightboxContent.appendChild(video);
+              lightbox.style.display = "flex";
+              video.play();
+            } else if (this.querySelector("img")) {
+              const img = this.querySelector("img").cloneNode();
+              lightboxContent.innerHTML = "";
+              lightboxContent.appendChild(img);
+              lightbox.style.display = "flex";
+            }
+          });
+        });
+
+        // Close lightbox
+        lightboxClose.addEventListener("click", function () {
+          lightbox.style.display = "none";
+          const video = lightboxContent.querySelector("video");
+          if (video) {
+            video.pause();
+          }
+        });
+
+        lightbox.addEventListener("click", function (e) {
+          if (e.target === lightbox) {
+            lightbox.style.display = "none";
+            const video = lightboxContent.querySelector("video");
+            if (video) {
+              video.pause();
+            }
+          }
+        });
+      });
+      // Dark Mode Toggle
+      const darkToggle = document.getElementById("darkModeToggle");
+
+      // Load saved mode
+      if (localStorage.getItem("darkMode") === "enabled") {
+        document.body.classList.add("dark-mode");
+        darkToggle.classList.add("active");
+      }
+
+      darkToggle.addEventListener("click", () => {
+        document.body.classList.toggle("dark-mode");
+        darkToggle.classList.toggle("active");
+
+        if (document.body.classList.contains("dark-mode")) {
+          localStorage.setItem("darkMode", "enabled");
+        } else {
+          localStorage.setItem("darkMode", "disabled");
+        }
+      });
+    </script>
+  </body>
+</html>
