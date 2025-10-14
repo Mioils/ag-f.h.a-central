@@ -4,6 +4,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Assemblies Of God Church F.H.A. Central</title>
+     <button class="hamburger" id="hamburger">
+      <i class="fas fa-bars"></i>
+    </button>
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <link
       rel="stylesheet"
@@ -729,6 +732,40 @@
           padding-right: 70px; /* Space for the toggle */
         }
       }
+      /* Hamburger styles */
+.hamburger {
+  display: none;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.8rem;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  nav {
+    display: none;
+    width: 100%;
+    background-color: var(--primary);
+  }
+
+  nav.active {
+    display: block;
+  }
+
+  nav ul {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  nav ul li {
+    margin: 1rem 0;
+  }
+
+  .hamburger {
+    display: block;
+  }
+}
     </style>
   </head>
   <body>
@@ -1454,6 +1491,14 @@
           localStorage.setItem("darkMode", "disabled");
         }
       });
+      // Hamburger toggle
+const hamburger = document.getElementById("hamburger");
+const navMenu = document.getElementById("navMenu");
+
+hamburger.addEventListener("click", () => {
+  navMenu.classList.toggle("active");
+});
     </script>
   </body>
 </html>
+
